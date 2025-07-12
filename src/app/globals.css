@@ -1,0 +1,112 @@
+@import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  --color-black-custom: #282828;
+  --color-white-custom: #dfdfdf;
+  --color-grey-custom: #cfcfcf;
+  --color-green-custom: #247c6f;
+  --color-green-light-custom: #18524980;
+  --color-orange-custom: #e96e09;
+
+  --color-black: var(--color-black-custom);
+  --color-white: var(--color-white-custom);
+  --color-green: var(--color-green-custom);
+  --color-orange: var(--color-orange-custom);
+}
+
+:root.dark {
+  --color-black: var(--color-grey-custom);
+  --color-white: var(--color-black-custom);
+  --color-green: var(--color-green-light-custom);
+}
+
+@theme inline {
+  --font-sans: var(--font-main-sans);
+  --font-mono: var(--font-main-mono);
+
+  --color-green: var(--color-green);
+  --color-orange: var(--color-orange);
+}
+
+@keyframes slide-left-right {
+
+  0%,
+  100% {
+    transform: translateX(-5%) translateY(6%);
+  }
+
+  25% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateX(5%) translateY(6%);
+  }
+
+  75% {
+    transform: translateY(0);
+  }
+}
+
+
+.animate-walking {
+  animation: slide-left-right 10s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+}
+
+@layer base {
+  body {
+    @apply font-sans overflow-x-hidden text-black bg-white
+  }
+
+  * {
+    @apply transition;
+  }
+
+  h1,
+  h2,
+  h3 {
+    @apply font-bold;
+  }
+
+  h1 {
+    @apply text-5xl;
+  }
+
+  h2 {
+    @apply text-3xl;
+  }
+
+  h3 {
+    @apply text-xl;
+  }
+
+  code {
+    @apply text-black font-mono text-sm;
+  }
+
+  ul {
+    li {
+      @apply even:bg-green/50 dark:even:bg-green rounded-2xl p-2;
+
+      span {
+        @apply font-bold text-lg;
+      }
+    }
+  }
+
+  ul.odd {
+    li {
+      @apply odd:bg-green/50 odd:dark:bg-green even:bg-transparent even:dark:bg-transparent;
+    }
+  }
+
+  .bg-green {
+    ul {
+      li {
+        @apply even:bg-green dark:even:bg-white brightness-110;
+      }
+    }
+  }
+
+}
